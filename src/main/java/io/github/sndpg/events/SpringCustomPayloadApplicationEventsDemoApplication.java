@@ -18,12 +18,12 @@ public class SpringCustomPayloadApplicationEventsDemoApplication {
     @Bean
     public ApplicationRunner applicationRunner(ApplicationContext applicationContext) {
         return args -> applicationContext.publishEvent(
-                new MyCustomPayloadApplicationEvent(this, new MyPayload(1L))
+                new MyCustomPayloadApplicationEvent<>(this, new MyPayload(1L))
         );
     }
 
     @EventListener(MyCustomPayloadApplicationEvent.class)
-    public void onMyCustomPayloadApplicationEvent(MyCustomPayloadApplicationEvent myCustomPayloadApplicationEvent) {
+    public void onMyCustomPayloadApplicationEvent(MyCustomPayloadApplicationEvent<MyPayload> myCustomPayloadApplicationEvent) {
         System.out.println("event with id " + myCustomPayloadApplicationEvent.getPayload().getId() +
                 " received with matching MyCustomPayloadApplicationEvent");
     }

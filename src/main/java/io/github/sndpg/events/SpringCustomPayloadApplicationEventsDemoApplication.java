@@ -24,7 +24,14 @@ public class SpringCustomPayloadApplicationEventsDemoApplication {
 
     @EventListener(MyCustomPayloadApplicationEvent.class)
     public void onMyCustomPayloadApplicationEvent(MyCustomPayloadApplicationEvent myCustomPayloadApplicationEvent) {
-        System.out.println("event with id " + myCustomPayloadApplicationEvent.getPayload().getId() + " received");
+        System.out.println("event with id " + myCustomPayloadApplicationEvent.getPayload().getId() +
+                " received with matching MyCustomPayloadApplicationEvent");
+    }
+
+    @EventListener(MyCustomPayloadApplicationEvent.class)
+    public void onMyCustomPayloadApplicationEvent(PayloadApplicationEvent<MyPayload> myCustomPayloadApplicationEvent) {
+        System.out.println("event with id " + myCustomPayloadApplicationEvent.getPayload().getId() +
+                " received with matching PayloadApplicationEvent");
     }
 
 }
